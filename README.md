@@ -13,7 +13,9 @@
 * Node.js
 ***
 ### ***Diagrams***
-
+#### ERD
 ![ERD](https://i.imgur.com/HgD6Yag.png)
+
+#### Component Hierarchy Diagram
 ![Component Hierarchy Diagram](https://i.imgur.com/1wxuxxv.png)
 
