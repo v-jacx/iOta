@@ -14,6 +14,6 @@
 ***
 ### ***Diagrams***
 
-![ERD](https://imgur.com/a/1uOcGSV)
-![Component Hierarchy Diagram](https://imgur.com/1wxuxxv)
+![ERD](https://i.imgur.com/HgD6Yag.png)
+![Component Hierarchy Diagram](https://i.imgur.com/1wxuxxv.png)
 
