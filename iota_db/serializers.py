@@ -7,10 +7,9 @@ class FollowSerializer(serializers.ModelSerializer):
         fields = ['user','follow']
 
 class ProfileSerializer(serializers.ModelSerializer):
-    following = FollowSerializer(many=True)
     class Meta:
         model = Profile
-        fields = ['id','email','username','firstname','lastname','password','private','image','website','bio','following']
+        fields = ['id','email','username','firstname','lastname','password','private','image','website','bio']
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
