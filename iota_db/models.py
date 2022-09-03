@@ -1,8 +1,8 @@
 from django.contrib.postgres.fields import ArrayField
 from django.db import models
-
+from django.contrib.auth.models import AbstractBaseUser
 #Profile Model
-class Profile(models.Model):
+class Profile(AbstractBaseUser):
     birthday = models.DateField(auto_now=False, auto_now_add=False)
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=100)
@@ -10,10 +10,13 @@ class Profile(models.Model):
     image = models.URLField(null=True, blank=True)
     firstname = models.CharField(max_length=100)
     lastname = models.CharField(max_length=100)
-    username = models.CharField(max_length=50)
+    username = models.CharField(max_length=50, unique=True)
     website = models.URLField(blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
     following = models.ManyToManyField("self",through='Follow',blank=True)
+
+    USERNAME_FIELD = 'username'
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.firstname
