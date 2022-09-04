@@ -13,7 +13,7 @@ class Profile(AbstractBaseUser):
     username = models.CharField(max_length=50, unique=True)
     website = models.URLField(blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
-    following = models.ManyToManyField("self",through='Follow',blank=True)
+    follow = models.ManyToManyField("self",through='Follow',blank=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = []
@@ -23,19 +23,19 @@ class Profile(AbstractBaseUser):
 
 #Through table for Following
 class Follow(models.Model):
-    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="followed_by", null=True)
-    follow = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="being_followed", null=True)
+    user = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="following", null=True)
+    follow = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name="followers", null=True)
 
 #Post Model
 class Post(models.Model):
     images = ArrayField(models.URLField(blank=True, null=True), blank=True)
     caption = models.TextField(blank=True, null=True)
-    likes = models.PositiveIntegerField(null=True)
+    likes = models.PositiveIntegerField(default=0)
     post_creator = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts', null=True)
 
 #Comment Model
 class Comment(models.Model):
-    commentor_name = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='comments')
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='post', null=True)
+    commentor = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='creator')
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', null=True)
     content = models.TextField(null=True)
-    likes = models.PositiveIntegerField(null=True)
+    likes = models.PositiveIntegerField(default=0)
