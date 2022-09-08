@@ -26,12 +26,6 @@ class BasicProfileSerializer(serializers.ModelSerializer):
         model = Profile
         fields = ['id','username','firstname','lastname','private','image','bio','website']
 
-class FollowingSerializer(serializers.ModelSerializer):
-    follow = BasicProfileSerializer()
-    class Meta:
-        model = Follow
-        fields = ['follow']
-
 class FollowedBySerializer(serializers.ModelSerializer):
     user = BasicProfileSerializer()
     class Meta:
@@ -39,15 +33,28 @@ class FollowedBySerializer(serializers.ModelSerializer):
         fields = ['user']
 
 class CommentSerializer(serializers.ModelSerializer):
+    commentor = BasicProfileSerializer()
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['id','commentor','content','likes']
 
 class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
     class Meta:
         model = Post
         fields =[ 'id','images','caption','likes','post_creator','comments']
+
+class BasicProfileWithPostsSerializer(serializers.ModelSerializer):
+    posts = PostSerializer(many=True)
+    class Meta:
+        model = Profile
+        fields = ['id','username','firstname','lastname','private','image','bio','website','posts']
+
+class FollowingSerializer(serializers.ModelSerializer):
+    follow = BasicProfileWithPostsSerializer()
+    class Meta:
+        model = Follow
+        fields = ['follow']
 
 class ProfileWithAllInfoSerializer(serializers.ModelSerializer):
     following = FollowingSerializer(many=True)
@@ -57,4 +64,3 @@ class ProfileWithAllInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
         fields = ['id','birthday','email','username','firstname','lastname','password','private','image','website','bio', 'posts','following','followers']
-

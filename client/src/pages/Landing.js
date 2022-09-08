@@ -11,7 +11,7 @@ const Landing=()=>{
                     <p className='lower-txt'>Join iOta today.</p>
                 </div>
                 <div className="flex landing-btns">
-                    <button className="landing-btn box-shadow ff-acme">Login</button>
+                   <Link to='/login'><button className="landing-btn box-shadow ff-acme">Login</button></Link> 
                    <Link to='/register'><button className='landing-btn box-shadow ff-acme'>Sign Up</button></Link>
                 </div>
             </div>

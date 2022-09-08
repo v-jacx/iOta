@@ -15,6 +15,9 @@
 .ff-acme{
     font-family: 'Acme', sans-serif;
 }
+.ff-sans-serif{
+    font-family: sans-serif;
+}
 .flex{
     display: flex;
     gap: var(--gap, 1rem);
@@ -22,44 +25,9 @@
 .flex-column{
     display: flex;
     flex-direction: column;
-}
-.form{
-    justify-content: space-evenly;
-    align-items: center;
-    height: 500px;
-    max-width: 450px;
-    margin-top: 5%;
-    margin-left: 30%;
-    border-radius: 10px;
-}
-.form-fields{
-    width: 300px;
-    height: 50px;
-    position: relative;
-}
-.form-fields input{
-    width: 100%;
-    height: 100%;
-    border: transparent;
-    border-radius: 10px;
-    outline: none;
-    font-size: 20px;
-    background-color: rgba(255, 255, 255, 0.364);
+    gap: var(--gap, 1rem);
 }
 
-.form-fields label{
-    position: absolute;
-    top: 15px;
-    left: 15px;
-    text-transform: capitalize;
-    font-size: 18px;
-    pointer-events: none;
-    transition: 0.3s;
-}
-.form-fields input:focus ~ label{
-    transform: translateY(-18px);
-    font-size: 16px;
-}
 .grid{
     display: grid;
     gap: var(--gap, 1rem);
@@ -69,12 +37,110 @@
     background: linear-gradient(#e8b50a, #e8550a);
 }
 
-
 /* specified classes */
+.comments{
+    margin-top: 5%;
+    margin-left: 5%;
+    --gap: 1rem;
+}
+.comment{
+    grid-template-columns: repeat(3,1fr);
+    --gap: 0
+}
+.comment-btn{
+    width: 5rem;
+    padding: 6px;
+    font-size: 18px;
+    color: #e8550a;
+    background-color: transparent;
+    border: none;
+}
+.comment-content{
+   display: inline;
+   margin: 5px;
+}
+.comment-content-container{
+    width: 15rem;
+}
+.comment-icon{
+    width: 25px;
+    height: 25px;
+    color:#a9abb0;
+    margin-left: -5px;
+    padding-right: 10px;
+}
+.comment-input{
+    width: 17rem;
+    height: 2rem;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+}
+.comment-input-container{
+    align-items: center;
+    --gap: 0;
+    margin-top: 15px;
+
+    padding-left: 15px;
+    border: 2px solid#e8b50a;
+    border-radius: 8px;
+}
+.comment-profile-img{
+    width: 3.5rem;
+    border: 2px solid linear-gradient(#e8b50a, #e8550a);
+    border-radius: 100%;
+}
+
+.feed-primary-layout{
+    align-items: center; 
+    margin-top: 5%;
+    --gap: 2rem;
+}
+.form{
+    justify-content: center;
+    align-items: center;
+    --gap: 2rem;
+    max-width: 400px;
+    margin-top: 5%;
+    margin-left: 30%;
+    border-radius: 10px;
+    padding: 35px;
+}
+.form-fields{
+    width: 300px;
+    height: 35px;
+    position: relative;
+}
+.form-fields input{
+    width: 100%;
+    height: 100%;
+    border: transparent;
+    border-radius: 10px;
+    outline: none;
+    font-size: 15px;
+    background-color: rgba(255, 255, 255, 0.364);
+}
+
+.form-fields label{
+    position: absolute;
+    top: 7px;
+    left: 15px;
+    text-transform: capitalize;
+    font-size: 18px;
+    pointer-events: none;
+    transition: 0.3s;
+}
+.form-fields input:focus+label, .form-fields input:valid+label{
+    transform: translateY(-7px);
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.513);
+}
 .landing{
     --gap: 6rem;
     justify-content: center;
-    margin-top: 10rem;
+    margin-top: 5rem;
     
 }
 .landing-btn{
@@ -95,9 +161,10 @@
 }
 
 .landing-greeting{
-    width: 450px;
+    width: 400px;
     align-items: center;
-    padding: 1rem;
+    --gap: 2rem;
+    padding: 2rem;
     border-radius: 1rem;
 }
 
@@ -111,7 +178,7 @@
     margin-left: 2rem;
 }
 .lettering-logo{
-    font-size: 2rem;
+    font-size: 2.5rem;
     margin: 0;
 }
 .lower-txt{
@@ -121,14 +188,52 @@
 .nav{
     width: 100%;
     padding: 3px;
+    justify-content: space-between;
 }
 .nav-elems{
     margin-left: 17%;
 }
+.nav-icon{
+    width: 27px;
+    height: 27px;
+}
+
+.nav-icon:hover{
+    color: grey;
+}
+.nav-icons{
+    align-items: flex-end;
+    margin-bottom: 10px;
+    margin-right: 17%;
+}
+.post-card{
+    width: 25rem;
+    --gap: 5px;
+    border: 2px solid #a9abb0;
+    border-radius: 10px;
+    padding: 10px;
+}
+.post-icon{
+    width: 30px;
+    height: 30px;
+}
+.post-icons{
+    margin-left: 5%;
+}
+.post-img{
+    width: 23rem;
+    justify-content: center;
+    align-self: center;
+    border-radius: 10px;
+    margin-top: 5%;
+}
 .upper-txt{
     font-size: 2.75rem;
 }
-
+.user-prompt{
+    margin-top: -20px;
+    margin-bottom: -10px;
+}
 /* responsive */
 @media (max-width: 820px){
     .landing-logo{
@@ -137,7 +242,8 @@
     }
     .landing-greeting{
         width: 17rem;
-        margin-left: 30%;
+        margin-left: 32%;
+        padding: 1.5rem;
         
     }
     .landing{
@@ -158,6 +264,6 @@
         margin-left: 7%;
     }
     .landing-greeting{
-        margin-left: 10%; 
+        margin-left: 9%; 
     }
 }

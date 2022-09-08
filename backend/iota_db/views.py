@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import FollowSerializer, PostSerializer, ProfileSerializer,ProfileWithAllInfoSerializer, CommentSerializer
-from .models import Profile
+from .serializers import FollowSerializer, FollowingSerializer, PostSerializer, ProfileSerializer,ProfileWithAllInfoSerializer, CommentSerializer,BasicProfileWithPostsSerializer
+from .models import Follow, Profile
 
 # Create User
 @api_view(['POST'])
@@ -39,7 +39,7 @@ def login(request):
 @api_view(['GET'])
 def get_user(request, pk):
     profile = Profile.objects.get(id=pk)
-    serializer = ProfileWithAllInfoSerializer(profile, context={'user_id': pk})
+    serializer = ProfileWithAllInfoSerializer(profile)
     return JsonResponse(serializer.data)
 
 # Follow
@@ -65,3 +65,4 @@ def comment(request):
     serializer.is_valid(raise_exception=True)
     serializer.save()
     return JsonResponse(serializer.data)
+

@@ -7,5 +7,5 @@ urlpatterns = [
     path('profile/<int:pk>', views.get_user),
     path('follow', views.follow),
     path('post', views.post),
-    path('comment', views.comment)
+    path('comment', views.comment),
 ]
