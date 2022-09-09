@@ -6,19 +6,17 @@ import FeedPostCard from "../components/FeedPostCard"
 import BASE_URL from '../globals'
 
 
-const Feed=(props)=>{
-    const {user}= props.userState
-    const {setUser} = props
-
+const Feed=({user, setUser})=>{
+    console.log(user)
     const getUser = async()=>{
-        const res = await axios.get(`${BASE_URL}/profile/${user.id}`)
+        const res = await axios.get(`${BASE_URL}/profile/${user.user_id}`)
 
-        setUser(res.data)  
+        setUser(res.data) 
     }
 
     useEffect(()=>{
         getUser()
-    })
+    },[])
 
     return(
         <div className="flex-column feed-primary-layout">
@@ -28,7 +26,7 @@ const Feed=(props)=>{
 }
 
 const mapStateToProps = (state)=>{
-    return {userState: state.userState}
+    return {user: state.userState.user}
 }
 const mapActionsToProps = (dispatch) => {
     return {setUser: (user) => dispatch(SetUser(user))}

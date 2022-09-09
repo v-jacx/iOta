@@ -3,11 +3,12 @@ import axios from 'axios'
 import {Link, useNavigate} from 'react-router-dom'
 import {connect} from 'react-redux'
 import {SetUser} from '../store/actions/UserActions'
+import { SetAuthTokens} from '../store/actions/AuthActions'
 import BASE_URL from '../globals'
 
-const SignUp=(props)=>{
+const SignUp=({setAuthTokens, setUser})=>{
     const navigate = useNavigate()
-    const {setUser} = props
+    const [message, setMessage] = useState('')
     const [formInfo, setFormInfo] = useState({
         firstname: '',
         lastname: '',
@@ -32,11 +33,26 @@ const SignUp=(props)=>{
             username: formInfo.username,
             email: formInfo.email,
             password: formInfo.password
+        }).catch(function(e){
+            const error = e.response.data
+            if(Object.keys(error).includes('username')){
+                setMessage(error.username[0])
+            }
+            else if(Object.keys(error).includes('birthday')){
+                setMessage(error.birthday[0])
+            }
+            else if(Object.keys(error).includes('email')){
+                setMessage(error.email[0])
+            }
         })
 
-        setUser(res.data)
-        navigate('/feed')
-    }
+            const tokens = { refresh: res.data.refresh,
+            access: res.data.access}
+            setAuthTokens(tokens)
+            setUser(res.data.payload)
+            localStorage.setItem('authTokens', tokens)
+            navigate('/feed')
+}
 
     return(
 
@@ -70,13 +86,17 @@ const SignUp=(props)=>{
                 <label>Confirm Password</label>
             </div>
             <div className='user-prompt'><h3>Already have an account? <Link to='/login'>Login</Link></h3></div>
+            <h5 hidden={message===''? 'hidden':''}>{message}</h5>
             <button className='landing-btn box-shadow ff-acme' onClick={(e)=>handleClick(e)}>Sign Up</button>
         </div>  
     )
 }
 
 const mapActionsToProps = (dispatch) => {
-    return {setUser: (user) => dispatch(SetUser(user))}
-}  
+    return {
+            setAuthTokens: (authTokens) => dispatch(SetAuthTokens(authTokens)),
+            setUser: (user) => dispatch(SetUser(user)),
+    }
+}
 
 export default connect(null, mapActionsToProps)(SignUp)

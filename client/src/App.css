@@ -92,6 +92,13 @@
     border: 2px solid linear-gradient(#e8b50a, #e8550a);
     border-radius: 100%;
 }
+.edit-profile-btn{
+    width: 25rem;
+    height: 35px;
+    border: 1.5px solid #ff9f0a;
+    border-radius: 10px;
+    margin-top: -15%;
+}
 
 .feed-primary-layout{
     align-items: center; 
@@ -136,6 +143,14 @@
     transform: translateY(-7px);
     font-size: 13px;
     color: rgba(0, 0, 0, 0.513);
+}
+.img-display{
+    width: 15rem;
+    border: 1.5px solid #ff9f0a;
+    border-radius: 5px;
+}
+.img-display-layout{
+    width: 40rem;
 }
 .landing{
     --gap: 6rem;
@@ -194,13 +209,10 @@
     margin-left: 17%;
 }
 .nav-icon{
-    width: 27px;
-    height: 27px;
+    width: 26px;
+    height: 26px;
 }
 
-.nav-icon:hover{
-    color: grey;
-}
 .nav-icons{
     align-items: flex-end;
     margin-bottom: 10px;
@@ -212,6 +224,10 @@
     border: 2px solid #a9abb0;
     border-radius: 10px;
     padding: 10px;
+}
+.post-follow{
+    margin-top: 10%;
+    margin-left: 15%;
 }
 .post-icon{
     width: 30px;
@@ -226,6 +242,27 @@
     align-self: center;
     border-radius: 10px;
     margin-top: 5%;
+}
+.profile{
+    width: 40rem;
+    grid-template-columns: repeat(2,1fr);
+    margin-left: 7%;
+    border-bottom: 2px solid #a9abb067;
+    padding: 5rem;
+    padding-bottom: 10px;
+}
+.profile-container{
+    align-items: center;
+}
+.profile-img{
+    width: 8rem;
+    border-radius: 100%;
+    margin-left: 10%;
+}
+.response{
+    font-size: 20px;
+    margin: -12px;
+    color: rgb(231, 228, 228);
 }
 .upper-txt{
     font-size: 2.75rem;

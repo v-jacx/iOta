@@ -1,6 +1,7 @@
 import {SET_USER} from '../types'
+import jwt_decode from "jwt-decode"
 const initialState = {
-    user: {}
+    user: localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null
 }
 
 const UserReducer = (state = initialState, action)=>{
