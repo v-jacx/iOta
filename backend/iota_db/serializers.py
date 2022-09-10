@@ -63,4 +63,13 @@ class ProfileWithAllInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Profile
-        fields = ['id','birthday','email','username','firstname','lastname','password','private','image','website','bio', 'posts','following','followers']
+        fields = ['id','birthday','email','username','firstname','lastname','private','image','website','bio', 'posts','following','followers']
+
+class BasicProfileWithFollowSerializer(serializers.ModelSerializer):
+        following = FollowingSerializer(many=True)
+        followers = FollowedBySerializer(many=True)
+        posts = PostSerializer(many=True)
+
+        class Meta:
+            model = Profile
+            fields = ['id','username','firstname','lastname','private','image','bio','website', 'posts','following','followers']

@@ -32,6 +32,7 @@ class Post(models.Model):
     caption = models.TextField(blank=True, null=True)
     likes = models.PositiveIntegerField(default=0)
     post_creator = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts', null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
 
 #Comment Model
 class Comment(models.Model):
