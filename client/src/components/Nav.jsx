@@ -1,12 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { connect } from 'react-redux'
-import { SetAuthTokens} from "../store/actions/AuthActions"
-import { SetUser } from "../store/actions/UserActions"
-const Nav=({user, setUser, SetAuthTokens})=>{
-    const handleClick = ()=>{
-        SetAuthTokens(null)
-        setUser(null)
-    }
+import {useState} from 'react'
+import { useNavigate } from "react-router-dom"
+import UserMenu from "./UserMenu"
+
+const Nav=({user})=>{
+    const navigate = useNavigate()
+    const [isActive, setIsActive]=useState(false)
 
     return(
         <div className="nav flex gradient-bkg">
@@ -19,10 +19,14 @@ const Nav=({user, setUser, SetAuthTokens})=>{
             <FontAwesomeIcon icon="fa-regular fa-square-plus" className="nav-icon"/>
             <FontAwesomeIcon icon="fa-regular fa-heart" className='nav-icon'/>
             <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className="nav-icon"/>
-            <h3 onClick={handleClick}>Logout</h3>
+            <div className='flex profile-icon-menu'>
+            <img src={user.image} className ='profile-icon' onClick={()=>setIsActive(!isActive)}/>
+            {isActive ? <UserMenu isActive={isActive} setIsActive={setIsActive}/> : ''}
+            </div>
             </div>
             ):''}
-        </div>
+        </div> 
+    
     )
 }
 
@@ -31,11 +35,6 @@ const mapStateToProps=(state)=>{
         user: state.userState.user
     }
 }
-const mapActionsToProps=(dispatch)=>{
-    return{
-        setUser: (user)=> dispatch(SetUser(user)),
-        SetAuthTokens: (authTokens)=> dispatch(SetAuthTokens(authTokens))
-    }
-}
 
-export default connect(mapStateToProps, mapActionsToProps)(Nav)
+
+export default connect(mapStateToProps)(Nav)
