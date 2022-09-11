@@ -12,11 +12,10 @@ const UserMenu = ({user, isActive, setIsActive, setUser, setAuthTokens}) =>{
     }
     const logout = ()=>{
         localStorage.clear()
-        SetAuthTokens(null)
+        setAuthTokens(null)
         setUser(null)
         setIsActive(!isActive)
     }
-    
     return(
         <div className='flex-column user-menu box-shadow'>
         <h3 className ='menu-item' onClick={goToProfile}>Profile</h3>
@@ -36,7 +35,7 @@ const mapStateToProps=(state)=>{
 const mapActionsToProps=(dispatch)=>{
     return{
         setUser: (user)=> dispatch(SetUser(user)),
-        SetAuthTokens: (authTokens)=> dispatch(SetAuthTokens(authTokens))
+        setAuthTokens: (authTokens)=> dispatch(SetAuthTokens(authTokens))
     }
 }
 

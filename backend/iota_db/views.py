@@ -62,7 +62,16 @@ def follow(request):
    serializer = FollowSerializer(data=request.data) 
    serializer.is_valid(raise_exception=True)
    serializer.save()
-   return JsonResponse(serializer.data)
+   followed = Profile.objects.get(pk=serializer['follow'].value)
+   followed_serializer = BasicProfileWithPostsSerializer(followed)
+   return JsonResponse(followed_serializer.data)
+
+# Unfollow
+@api_view(['DELETE'])
+def unfollow(request ,user ,follow):
+    followPair = Follow.objects.get(user=user, follow=follow)
+    followPair.delete()
+    return JsonResponse({'message':'unfollowed'})
 
 # Create Post
 @api_view(['Post'])

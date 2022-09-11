@@ -1,7 +1,8 @@
+import { useNavigate } from 'react-router-dom'
 import {SET_PROFILE} from '../types'
 
 const initialState = {
-    profile: null
+    profile: null,
 }
 
 const ProfileReducer = (state = initialState, action)=>{

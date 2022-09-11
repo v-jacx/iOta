@@ -1,8 +1,9 @@
-import {SET_USER, SET_FEED} from '../types'
+import {SET_USER, SET_FEED, SET_FOLLOWING_IDS, REMOVE_ID} from '../types'
 import jwt_decode from "jwt-decode"
 const initialState = {
     user: localStorage.getItem('authTokens') ? jwt_decode(localStorage.getItem('authTokens')) : null,
-    feed: null
+    feed: null,
+    followingIds: []
 }
 
 const UserReducer = (state = initialState, action)=>{
@@ -16,6 +17,11 @@ const UserReducer = (state = initialState, action)=>{
                 allPosts.push(follow.post)
             })
             return {...state, feed: allPosts}
+        case SET_FOLLOWING_IDS:
+            return{...state, followingIds: action.payload}
+        case REMOVE_ID:
+            const newIds = state.followingIds.filter(id => id !== action.payload)
+            return {...state, followingIds: newIds}
         default:
             return {...state}
     }

@@ -9,20 +9,25 @@ import Feed from './pages/Feed'
 import ProfileDetails from './components/ProfileDetails'
 import axios from 'axios'
 import {connect} from 'react-redux'
-import { SetUser, SetFeed} from './store/actions/UserActions'
+import { SetUser, SetFeed, SetFollowingIds} from './store/actions/UserActions'
 import BASE_URL from './globals'
-import { useEffect } from 'react'
+import { useEffect} from 'react'
 import Follow from './pages/Follow'
 
 
-function App({user, setUser, setFeed}) {
+function App({user, setUser, setFeed, setFollowingIds}) {
 
   const getUser = async()=>{
       const res = await axios.get(`${BASE_URL}/profile/${user.user_id}`).catch(function(e){console.log(e)})
-
       
       setUser(res.data)
+      let userFollowing = []
+      res.data.following.map((follow)=>{
+        userFollowing.push(follow.follow.id)
+    })
+  
       setFeed(res.data.following)
+      setFollowingIds(userFollowing)
   }
 
   useEffect(()=>{
@@ -40,8 +45,9 @@ function App({user, setUser, setFeed}) {
             <Route path='/login' element={<Login/>}/>
             <Route element = {<ProtectRoute/>}>
                 <Route path='/feed' element={<Feed/>}/>
-                <Route path='/:username' element={<ProfileDetails/>}/>
-                <Route path='/:username/followers' element={<Follow/>}/>
+                <Route path='/:username' element={<ProfileDetails/>}>
+                  <Route path = '/:username/:label' element={<Follow/>}/>
+                </Route>
             </Route>
           </Routes>
           
@@ -56,7 +62,8 @@ const mapStateToProps = (state)=>{
 const mapActionsToProps = (dispatch) => {
   return {
     setUser: (user) => dispatch(SetUser(user)),
-    setFeed: (following) => dispatch(SetFeed(following))
+    setFeed: (following) => dispatch(SetFeed(following)),
+    setFollowingIds: (ids) => dispatch(SetFollowingIds(ids))
   }
 }  
 

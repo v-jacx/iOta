@@ -4,6 +4,7 @@ import {useState} from 'react'
 import { useNavigate } from "react-router-dom"
 import UserMenu from "./UserMenu"
 
+
 const Nav=({user})=>{
     const navigate = useNavigate()
     const [isActive, setIsActive]=useState(false)
@@ -35,6 +36,5 @@ const mapStateToProps=(state)=>{
         user: state.userState.user
     }
 }
-
 
 export default connect(mapStateToProps)(Nav)
