@@ -13,6 +13,7 @@ import { SetUser, SetFeed, SetFollowingIds} from './store/actions/UserActions'
 import BASE_URL from './globals'
 import { useEffect} from 'react'
 import Follow from './pages/Follow'
+import PostCard from './components/PostCard'
 
 
 function App({user, setUser, setFeed, setFollowingIds}) {

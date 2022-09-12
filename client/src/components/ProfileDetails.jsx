@@ -56,7 +56,7 @@ const ProfileDetails = ({user, setProfile, profile, setUser, followingIds, setFo
             currentProfile.followers.map((follow, i)=>{
                 const result = follow.user.id === user.id ? currentProfile.followers.splice(i,1): ''
             })
-            setProfile(currentProfile)
+            setProfile(currentProfile )
 
             const res = await axios.delete(`${BASE_URL}/unfollow/${user.id}/${profile.id}`)
 

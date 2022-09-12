@@ -1,23 +1,26 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { connect } from 'react-redux'
 import {useState} from 'react'
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link} from "react-router-dom"
 import UserMenu from "./UserMenu"
+import PostCard from "./PostCard"
 
 
 const Nav=({user})=>{
     const navigate = useNavigate()
     const [isActive, setIsActive]=useState(false)
+    const [isOpen, setIsOpen]= useState(false)
 
     return(
         <div className="nav flex gradient-bkg">
+            {isOpen ? <PostCard setIsOpen={setIsOpen}/> : ''}
             <div className='nav-elems'>
             <h1 className="ff-dancing lettering-logo">iOta</h1>
             </div>
             {user ? (
             <div className="nav-icons flex">
-            <FontAwesomeIcon icon="home" className="nav-icon"/>       
-            <FontAwesomeIcon icon="fa-regular fa-square-plus" className="nav-icon"/>
+            <Link to='/feed'><FontAwesomeIcon icon="home" className="nav-icon"/></Link>    
+            <FontAwesomeIcon icon="fa-regular fa-square-plus" className="nav-icon" onClick={()=> setIsOpen(true)}/>
             <FontAwesomeIcon icon="fa-regular fa-heart" className='nav-icon'/>
             <FontAwesomeIcon icon="fa-solid fa-magnifying-glass" className="nav-icon"/>
             <div className='flex profile-icon-menu'>

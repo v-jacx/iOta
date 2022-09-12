@@ -7,9 +7,9 @@ import App from './App';
 import {BrowserRouter as Router} from 'react-router-dom';
 import {library} from '@fortawesome/fontawesome-svg-core';
 import {faMagnifyingGlass, faHome} from '@fortawesome/free-solid-svg-icons';
-import {faHeart, faComments, faFaceSmileBeam, faSquarePlus} from '@fortawesome/free-regular-svg-icons'
+import {faHeart, faComments, faFaceSmileBeam, faSquarePlus, faImages} from '@fortawesome/free-regular-svg-icons'
 
-library.add(faHeart, faHome, faComments, faFaceSmileBeam, faMagnifyingGlass, faSquarePlus)
+library.add(faHeart, faHome, faComments, faFaceSmileBeam, faMagnifyingGlass, faSquarePlus, faImages)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
