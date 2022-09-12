@@ -12,7 +12,7 @@ const Nav=({user})=>{
     const [isOpen, setIsOpen]= useState(false)
 
     return(
-        <div className="nav flex gradient-bkg">
+        <nav className="nav flex gradient-bkg">
             {isOpen ? <PostCard setIsOpen={setIsOpen}/> : ''}
             <div className='nav-elems'>
             <h1 className="ff-dancing lettering-logo">iOta</h1>
@@ -29,7 +29,7 @@ const Nav=({user})=>{
             </div>
             </div>
             ):''}
-        </div> 
+        </nav> 
     
     )
 }

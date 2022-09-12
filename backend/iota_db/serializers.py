@@ -1,4 +1,4 @@
-from .models import Follow, Post, Profile, Comment
+from .models import Follow, Photo, Post, Profile, Comment
 from rest_framework import serializers
 from django.http import JsonResponse
 
@@ -38,12 +38,24 @@ class CommentSerializer(serializers.ModelSerializer):
         model = Comment
         fields = ['id','commentor','content','likes']
 
+class CreatePostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Post
+        fields =[ 'id','caption','likes','post_creator']
+
+class PhotoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Photo
+        fields = ['photo','post']
+
 class PostSerializer(serializers.ModelSerializer):
     comments = CommentSerializer(many=True)
+    images = PhotoSerializer(many=True)
     class Meta:
         model = Post
         fields =[ 'id','images','caption','likes','post_creator','comments']
 
+        
 class BasicProfileWithPostsSerializer(serializers.ModelSerializer):
     posts = PostSerializer(many=True)
     class Meta:

@@ -1,9 +1,10 @@
+from os import PRIO_PGRP
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import FollowSerializer, FollowingSerializer, PostSerializer, ProfileSerializer,ProfileWithAllInfoSerializer, CommentSerializer,BasicProfileWithPostsSerializer,BasicProfileWithFollowSerializer
-from .models import Follow, Profile
+from .serializers import FollowSerializer, PhotoSerializer, PostSerializer, ProfileSerializer,ProfileWithAllInfoSerializer, CommentSerializer,BasicProfileWithPostsSerializer,BasicProfileWithFollowSerializer, CreatePostSerializer
+from .models import Follow, Profile, Post
 
 # Create User
 @api_view(['POST'])
@@ -75,11 +76,35 @@ def unfollow(request ,user ,follow):
 
 # Create Post
 @api_view(['Post'])
-def post(request):
-    serializer = PostSerializer(data=request.data)
+def post(request, pk):
+    caption = request.data['caption']
+    images = []
+    for file in request.FILES:
+        images.append(request.FILES.get(file))
+
+    post_data = {
+        'caption': caption,
+        'post_creator': pk
+    }
+    serializer = CreatePostSerializer(data=post_data)
     serializer.is_valid(raise_exception=True)
     serializer.save()
-    return JsonResponse(serializer.data)
+    
+    post_id = serializer.data['id']
+
+    for image in images:
+        print(image)
+        photo_serializer = PhotoSerializer(data={
+            "photo": image,
+            "post": post_id
+        })
+        photo_serializer.is_valid(raise_exception=True)
+        photo_serializer.save()
+        
+    post = Post.objects.get(id=post_id)
+    post_serializer = PostSerializer(post)
+
+    return JsonResponse(post_serializer.data)
 
 #Create Comment
 @api_view(['POST'])

@@ -8,6 +8,6 @@ urlpatterns = [
     path('profile/<str:username>',views.get_profile),
     path('follow', views.follow),
     path('unfollow/<int:user>/<int:follow>', views.unfollow),
-    path('post', views.post),
+    path('post/<int:pk>', views.post),
     path('comment', views.comment),
 ]

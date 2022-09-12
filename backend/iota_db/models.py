@@ -28,7 +28,6 @@ class Follow(models.Model):
 
 #Post Model
 class Post(models.Model):
-    images = ArrayField(models.URLField(blank=True, null=True), blank=True)
     caption = models.TextField(blank=True, null=True)
     likes = models.PositiveIntegerField(default=0)
     post_creator = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='posts', null=True)
@@ -40,3 +39,7 @@ class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments', null=True)
     content = models.TextField(null=True)
     likes = models.PositiveIntegerField(default=0)
+
+class Photo(models.Model):
+    photo = models.ImageField(null=False, blank=False)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='images')
