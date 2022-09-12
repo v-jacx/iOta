@@ -39,7 +39,8 @@ const PostCard = ({setIsOpen, user}) =>{
             'content-type':'multipart/form-data',
           }
         })
-        setIsOpen(false)
+        // setIsOpen(false)
+        console.log(res)
       }
 
       const {getRootProps, getInputProps, isDragActive} = useDropzone({onDrop})
