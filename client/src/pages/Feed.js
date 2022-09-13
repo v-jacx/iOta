@@ -8,7 +8,9 @@ const Feed=({user})=>{
     
     return(
         <div className="flex-column feed-primary-layout">
+
             <FeedPostCard/>
+
         </div>
     )
 }

@@ -7,7 +7,6 @@ import PostCard from "./PostCard"
 
 
 const Nav=({user})=>{
-    const navigate = useNavigate()
     const [isActive, setIsActive]=useState(false)
     const [isOpen, setIsOpen]= useState(false)
 

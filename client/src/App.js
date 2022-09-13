@@ -6,6 +6,7 @@ import ProtectRoute from './utils/ProtectRoute'
 import SignUp from './pages/SignUp';
 import Login from './pages/Login';
 import Feed from './pages/Feed'
+import EditProfile from './pages/EditProfile'
 import ProfileDetails from './components/ProfileDetails'
 import axios from 'axios'
 import {connect} from 'react-redux'
@@ -13,7 +14,7 @@ import { SetUser, SetFeed, SetFollowingIds} from './store/actions/UserActions'
 import BASE_URL from './globals'
 import { useEffect} from 'react'
 import Follow from './pages/Follow'
-import PostCard from './components/PostCard'
+
 
 
 function App({user, setUser, setFeed, setFollowingIds}) {
@@ -37,11 +38,13 @@ function App({user, setUser, setFeed, setFollowingIds}) {
 
 
   return (
-    <div className='App'>
-        <Nav />
+    <div className='App flex-column'>
+        <header>
+          <Nav />
+        </header>
         <main>
           <Routes>
-            <Route path='/' element={<Landing/>}/>
+            <Route path='/' element={<EditProfile/>}/>
             <Route path='/register' element={<SignUp/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route element = {<ProtectRoute/>}>
@@ -51,7 +54,6 @@ function App({user, setUser, setFeed, setFollowingIds}) {
                 </Route>
             </Route>
           </Routes>
-          
         </main>
     </div>
   );

@@ -55,7 +55,6 @@ const SignUp=({setAuthTokens, setUser})=>{
 }
 
     return(
-
         <div className='flex-column form gradient-bkg'>
             <div className='form-fields'>
                 <input type='text' required onChange={(e)=>setFormInfo({...formInfo, firstname: e.target.value})}></input>
@@ -88,7 +87,7 @@ const SignUp=({setAuthTokens, setUser})=>{
             <div className='user-prompt'><h3>Already have an account? <Link to='/login'>Login</Link></h3></div>
             <h5 hidden={message===''? 'hidden':''}>{message}</h5>
             <button className='landing-btn box-shadow ff-acme' onClick={(e)=>handleClick(e)}>Sign Up</button>
-        </div>  
+        </div>
     )
 }
 

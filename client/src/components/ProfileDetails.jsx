@@ -69,7 +69,7 @@ const ProfileDetails = ({user, setProfile, profile, setUser, followingIds, setFo
 
     return profile && user.following ? (
         <div className="flex-column profile-container">
-            <Outlet />
+            <Outlet/>
             <div className="grid profile">
                 <img src={profile.image} className="profile-img"/>
                 <div className='profile-username'>{profile.username}</div>

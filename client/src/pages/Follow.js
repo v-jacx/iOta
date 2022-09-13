@@ -13,7 +13,7 @@ const Follow = ({profile})=>{
     }
 
     return profile ? (
-        <div className=" overlay " onClick={(e)=>goToProfile(e)}>
+        <div className="overlay margin-top" onClick={(e)=>goToProfile(e)}>
         <div onClick={(e)=> e.stopPropagation()} className="flex-column follow-container box-shadow">
             <div className="follow-header">{label}<span className="follow-close ff-sans-serif" onClick={(e)=>goToProfile(e)}>X</span></div>
             <div className = 'follow-card-container'>
