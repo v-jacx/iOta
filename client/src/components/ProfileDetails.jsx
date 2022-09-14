@@ -11,12 +11,13 @@ const ProfileDetails = ({user, setProfile, profile, setUser, followingIds, setFo
         const {username} = useParams()
         const navigate = useNavigate()
         const [followed, setFollowed] = useState(false)
-
-
+        const [posts, setPosts] = useState()
+    
         const getProfile = async()=>{
             const res = await axios.get(`${BASE_URL}/profile/${username}`)
             setProfile(res.data)
             setFollowed(false)
+            setPosts(res.data.posts)
         }
 
         const handleClick = (e) =>{
@@ -88,9 +89,9 @@ const ProfileDetails = ({user, setProfile, profile, setUser, followingIds, setFo
                {user.id === profile.id ? <button className='profile-btn ff-acme' onClick={editProfile}>Edit Profile</button> : followingIds.includes(profile.id) || followed ? <button className='profile-btn ff-acme' onClick={unfollowProfile}>Unfollow</button> : <button className='profile-btn ff-acme' onClick={followProfile}>Follow</button>}
             </div>
             <div className="flex img-display-layout">
-                <img src='/assets/static-logo.png' className="img-display" />
-                <img src='/assets/static-logo.png' className="img-display"/>
-                <img src='/assets/static-logo.png' className="img-display"/>
+              {profile.posts.map((post)=>(
+                <img src={post.images[0].photo} className='img-display'/>
+              ))}
             </div>
         </div>
         

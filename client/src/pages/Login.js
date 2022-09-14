@@ -37,7 +37,7 @@ const Login=({setAuthTokens, setUser})=>{
                                 <label>Username</label>
                         </div>
                         <div className='form-fields'>
-                                <input type='text' required onChange={(e)=>setFormFields({...formFields, password: e.target.value})}></input>
+                                <input type='password' required onChange={(e)=>setFormFields({...formFields, password: e.target.value})}></input>
                                 <label>Password</label>
                         </div>
                         <h5 className='response' hidden={message===''? 'hidden':''}>{message}</h5>

@@ -27,7 +27,7 @@ function App({user, setUser, setFeed, setFollowingIds}) {
       res.data.following.map((follow)=>{
         userFollowing.push(follow.follow.id)
     })
-  
+
       setFeed(res.data.following)
       setFollowingIds(userFollowing)
   }

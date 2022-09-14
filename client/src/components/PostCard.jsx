@@ -39,7 +39,7 @@ const PostCard = ({setIsOpen, user}) =>{
             'content-type':'multipart/form-data',
           }
         })
-        // setIsOpen(false)
+        setIsOpen(false)
         console.log(res)
       }
 

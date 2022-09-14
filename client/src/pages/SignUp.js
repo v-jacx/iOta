@@ -77,11 +77,11 @@ const SignUp=({setAuthTokens, setUser})=>{
                 <label>Email</label>
             </div>
             <div className='form-fields'>
-                <input type='text' required onChange={(e)=>setFormInfo({...formInfo, password: e.target.value})}></input>
+                <input type='password' required onChange={(e)=>setFormInfo({...formInfo, password: e.target.value})}></input>
                 <label>Password</label>
             </div>
             <div className='form-fields'>
-                <input type='text' required onChange={(e)=>setFormInfo({...formInfo, confirmPassword: e.target.value})}></input>
+                <input type='password' required onChange={(e)=>setFormInfo({...formInfo, confirmPassword: e.target.value})}></input>
                 <label>Confirm Password</label>
             </div>
             <div className='user-prompt'><h3>Already have an account? <Link to='/login'>Login</Link></h3></div>

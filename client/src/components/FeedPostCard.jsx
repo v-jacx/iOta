@@ -1,27 +1,39 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import Picker from 'emoji-picker-react'
+import { useEffect } from 'react'
 import {useState, React} from 'react'
-const FeedPostCard =()=>{
+import {connect} from 'react-redux'
+import SimpleImageSlider from "react-simple-image-slider";
+
+const FeedPostCard =({follow, post, images})=>{
     const [comment, setComment] = useState('')
     const [isOpen, setIsOpen] = useState(false)
     const onEmojiClick = (e, emojiObject) =>{
         setComment(prevComment => prevComment + emojiObject.emoji)
         console.log(comment)
     }
-
     return(
-        <div className='flex-column post-card box-shadow'>
-            <img src='/assets/static-logo.png' className='post-img'/>
+        <div className='flex-column post-card fit-content box-shadow'>
+                <div className='post-img'>
+                    <SimpleImageSlider
+                        width={350}
+                        height={350}
+                        images={images}
+                        showBullets={true}
+                        showNavs={true}
+                        className='post-img'
+                    />
+                </div>
             <div className="flex post-icons">
             <FontAwesomeIcon icon="fa-regular fa-heart" className='post-icon'/>
             <FontAwesomeIcon icon="fa-regular fa-comments" className='post-icon'/>
             </div>
             <div className='flex-column comments'>
                 <div className='grid comment'>
-                    <img src='/assets/static-logo.png' className='comment-profile-img'/>
+                    <img src={follow.follow.image} className='comment-profile-img'/>
                     <div className='comment-content-container'>
-                        <h4 className='comment-content'>USERNAME</h4>
-                        <p className='comment-content ff-sans-serif'>commment dtgjeoj  dfosdjge sdfjosdfg hnrogivkj fjdslkjeoinf dsfoisdhroefn dskfh;dotj odnhofdpfoi</p>
+                        <h4 className='comment-content'>{follow.follow.username}</h4>
+                        <p className='comment-content ff-sans-serif'>{post.caption}</p>
                     </div>
                 </div>
             </div>
@@ -36,4 +48,7 @@ const FeedPostCard =()=>{
     )
 }
 
-export default FeedPostCard
+const mapStateToProps = (state)=>{
+    return {user: state.userState.user}
+}
+export default connect(mapStateToProps)(FeedPostCard)
