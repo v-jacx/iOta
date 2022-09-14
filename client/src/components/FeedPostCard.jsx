@@ -1,5 +1,14 @@
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
+import Picker from 'emoji-picker-react'
+import {useState, React} from 'react'
 const FeedPostCard =()=>{
+    const [comment, setComment] = useState('')
+    const [isOpen, setIsOpen] = useState(false)
+    const onEmojiClick = (e, emojiObject) =>{
+        setComment(prevComment => prevComment + emojiObject.emoji)
+        console.log(comment)
+    }
+
     return(
         <div className='flex-column post-card box-shadow'>
             <img src='/assets/static-logo.png' className='post-img'/>
@@ -18,10 +27,11 @@ const FeedPostCard =()=>{
             </div>
 
             <div className='comment-input-container flex'>
-                <FontAwesomeIcon icon="fa-regular fa-face-smile-beam" className='comment-icon'/>
-                <input type='text' placeholder='Add a comment...' className='comment-input ff-acme'/>
+                <FontAwesomeIcon icon="fa-regular fa-face-smile-beam" className='comment-icon' onClick={()=>setIsOpen(!isOpen)}/>
+                <input className='comment-input ff-acme' onChange={(e)=>setComment(e.target.value)} value={comment} placeholder='comment here...'/>
                 <button className='ff-acme comment-btn'>POST</button>
             </div>
+            {isOpen ? <div className='emoji-picker'><Picker onEmojiClick={onEmojiClick} /></div> : ''}
         </div>
     )
 }

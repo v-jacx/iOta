@@ -10,4 +10,5 @@ urlpatterns = [
     path('unfollow/<int:user>/<int:follow>', views.unfollow),
     path('post/<int:pk>', views.post),
     path('comment', views.comment),
+    path('profile/update/<int:pk>', views.updateUser)
 ]

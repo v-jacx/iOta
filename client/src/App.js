@@ -44,13 +44,14 @@ function App({user, setUser, setFeed, setFollowingIds}) {
         </header>
         <main>
           <Routes>
-            <Route path='/' element={<EditProfile/>}/>
+            <Route path='/' element={<Landing/>}/>
             <Route path='/register' element={<SignUp/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route element = {<ProtectRoute/>}>
                 <Route path='/feed' element={<Feed/>}/>
                 <Route path='/:username' element={<ProfileDetails/>}>
                   <Route path = '/:username/:label' element={<Follow/>}/>
+                  <Route path = '/:username/edit' element={<EditProfile/>}/>
                 </Route>
             </Route>
           </Routes>

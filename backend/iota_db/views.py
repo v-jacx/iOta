@@ -3,7 +3,7 @@ from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.exceptions import AuthenticationFailed
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import FollowSerializer, PhotoSerializer, PostSerializer, ProfileSerializer,ProfileWithAllInfoSerializer, CommentSerializer,BasicProfileWithPostsSerializer,BasicProfileWithFollowSerializer, CreatePostSerializer
+from .serializers import FollowSerializer, PhotoSerializer, PostSerializer, ProfileSerializer,ProfileWithAllInfoSerializer, CommentSerializer,BasicProfileWithPostsSerializer,BasicProfileWithFollowSerializer, CreatePostSerializer, BasicProfileSerializer
 from .models import Follow, Profile, Post
 
 # Create User
@@ -114,3 +114,11 @@ def comment(request):
     serializer.save()
     return JsonResponse(serializer.data)
 
+@api_view(['POST'])
+def updateUser(request, pk):
+    user = Profile.objects.get(id=pk)
+    serializer = BasicProfileSerializer(instance=user, data=request.data)
+    serializer.is_valid(raise_exception=True)
+    serializer.save()
+
+    return JsonResponse(serializer.data)

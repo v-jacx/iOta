@@ -10,6 +10,7 @@ const Nav=({user})=>{
     const [isActive, setIsActive]=useState(false)
     const [isOpen, setIsOpen]= useState(false)
 
+
     return(
         <nav className="nav flex gradient-bkg">
             {isOpen ? <PostCard setIsOpen={setIsOpen}/> : ''}

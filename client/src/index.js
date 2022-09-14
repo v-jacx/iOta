@@ -9,6 +9,7 @@ import {library} from '@fortawesome/fontawesome-svg-core';
 import {faMagnifyingGlass, faHome, faArrowLeft, faXmark} from '@fortawesome/free-solid-svg-icons';
 import {faHeart, faComments, faFaceSmileBeam, faSquarePlus, faImages} from '@fortawesome/free-regular-svg-icons'
 
+
 library.add(faHeart, faHome, faComments, faFaceSmileBeam, faMagnifyingGlass, faSquarePlus, faImages, faArrowLeft, faXmark)
 
 const root = ReactDOM.createRoot(document.getElementById('root'));

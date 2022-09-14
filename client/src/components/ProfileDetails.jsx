@@ -63,6 +63,9 @@ const ProfileDetails = ({user, setProfile, profile, setUser, followingIds, setFo
             console.log(res)
         }
 
+        const editProfile = async()=>{
+            navigate(`/${username}/edit`)
+        }
         useEffect(()=>{
             getProfile()
         },[username])
@@ -82,7 +85,7 @@ const ProfileDetails = ({user, setProfile, profile, setUser, followingIds, setFo
                     <div className='profile-name'>{profile.firstname} {profile.lastname}</div>
                     <p className='profile-bio ff-sans-serif'>{profile.bio}</p>
                 </div>
-               {user.id === profile.id ? <button className='profile-btn ff-acme'>Edit Profile</button> : followingIds.includes(profile.id) || followed ? <button className='profile-btn ff-acme' onClick={unfollowProfile}>Unfollow</button> : <button className='profile-btn ff-acme' onClick={followProfile}>Follow</button>}
+               {user.id === profile.id ? <button className='profile-btn ff-acme' onClick={editProfile}>Edit Profile</button> : followingIds.includes(profile.id) || followed ? <button className='profile-btn ff-acme' onClick={unfollowProfile}>Unfollow</button> : <button className='profile-btn ff-acme' onClick={followProfile}>Follow</button>}
             </div>
             <div className="flex img-display-layout">
                 <img src='/assets/static-logo.png' className="img-display" />
